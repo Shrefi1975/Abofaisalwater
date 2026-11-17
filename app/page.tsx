@@ -3,7 +3,15 @@
 import { useMemo, useRef, useState } from "react"
 import { ArrowDown, ArrowLeft, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
 
-const brands = ["بيرين", "Nova", "نوق", "فيحاء", "أكويا", "البير"]
+const brands = [
+  { name: "مياه رِفا", key: "rifa" },
+  { name: "مياه نوفا", key: "nova" },
+  { name: "مياه أكويا", key: "akoya" },
+  { name: "مياه صفا", key: "safa" },
+  { name: "مياه البيان", key: "al-bayan" },
+  { name: "مياه بيرين", key: "berain" },
+  { name: "مياه العين", key: "al-ain" },
+]
 
 export default function Page() {
   const [neighborhood, setNeighborhood] = useState("")
@@ -39,8 +47,8 @@ export default function Page() {
       </section>
 
       <section id="brands" className="brands-section" aria-labelledby="brands-heading">
-        <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">مياهك المفضلة… واصلة لحد بابك!</h1><p>توصيل مجاني داخل جدة من أشهر ماركات المياه.</p></div>
-        <div className="brand-list" aria-label="الماركات المتوفرة">{brands.map((brand, index) => <div className={`brand-tile brand-tile-${index + 1}`} key={brand}>{brand}</div>)}</div>
+        <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">ماركات مياه نثق بجودتها</h1><p>اختاري من أشهر العلامات، ونوصلها لبابك مجاناً داخل جدة.</p></div>
+        <div className="brand-list" aria-label="ماركات المياه المتوفرة">{brands.map((brand) => <article className="brand-card" key={brand.key}><div className={`brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} /><h2>{brand.name}</h2></article>)}</div>
         <a href="#order" className="browse-link">اكتشف العروض المتاحة <ArrowDown size={16} /></a>
       </section>
 

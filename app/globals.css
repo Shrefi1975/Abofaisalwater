@@ -36,17 +36,24 @@ button, input { font: inherit; }
 .order-hotspot { left: 13%; }
 .browse-hotspot { left: 28%; }
 .hero-hotspot:focus-visible { outline: 3px solid white; outline-offset: 3px; box-shadow: 0 0 0 6px #146d8d; }
-.brands-section { padding: 48px 22px 45px; text-align: center; background: #f7fafb; }
+.brands-section { padding: 52px 22px 48px; text-align: center; background: #f7fafb; }
 .brands-heading > span { display: inline-flex; align-items: center; gap: 7px; color: #168a67; font-size: 12px; font-weight: 800; }
 .brands-heading h1 { margin: 10px 0 4px; color: #143b50; font-size: clamp(23px, 3vw, 34px); font-weight: 800; line-height: 1.5; }
 .brands-heading p { margin: 0; color: #718792; font-size: 14px; }
-.brand-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: min(860px, 100%); margin: 25px auto 0; }
-.brand-tile { display: grid; place-items: center; min-width: 112px; min-height: 62px; padding: 9px 18px; border: 1px solid #e3edef; border-radius: 14px; color: #236276; background: white; box-shadow: 0 5px 14px rgba(31,72,89,.035); font-size: 19px; font-weight: 800; }
-.brand-tile-2 { color: #408477; font-family: Manrope, sans-serif; font-style: italic; }
-.brand-tile-3 { color: #207b89; }
-.brand-tile-4 { color: #318e75; }
-.brand-tile-5 { color: #718292; font-size: 15px; }
-.brand-tile-6 { color: #286391; font-family: Manrope, sans-serif; font-style: italic; }
+.brand-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; width: min(920px, 100%); margin: 28px auto 0; }
+.brand-card { min-width: 0; padding: 12px; overflow: hidden; border: 1px solid #e4edef; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgba(31,72,89,.055); transition: transform .2s ease, box-shadow .2s ease; }
+.brand-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(31,72,89,.1); }
+.brand-art { width: 100%; aspect-ratio: 1.08 / 1; border-radius: 12px; background-color: #fff; background-image: url('/water-brand-collage.jpg'); background-repeat: no-repeat; background-size: 350% auto; }
+.brand-art-akoya { background-position: 10% 24%; }
+.brand-art-rifa { background-position: 54% 34%; }
+.brand-art-nova { background-position: 92% 29%; }
+.brand-art-safa { background-position: 54% 71%; }
+.brand-art-al-bayan { background-position: 10% 52%; }
+.brand-art-berain { background-position: 10% 83%; }
+.brand-art-al-ain { background-position: 94% 74%; }
+.brand-card h2 { margin: 8px 0 2px; color: #245467; font-size: 15px; font-weight: 800; }
+.brand-card:hover h2 { color: #168a67; }
+@media (prefers-reduced-motion: reduce) { .brand-card { transition: none; } }
 .browse-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 24px; color: #176d89; text-decoration: none; font-size: 13px; font-weight: 800; }
 .order-section { display: grid; grid-template-columns: 1fr minmax(340px, 480px); align-items: center; gap: clamp(35px, 8vw, 110px); width: min(1000px, calc(100% - 40px)); margin: 0 auto; padding: 58px 0 72px; scroll-margin-top: 24px; }
 .order-copy { padding-inline: 10px; }
@@ -85,6 +92,6 @@ button, input { font: inherit; }
 .privacy-note strong { color: #55717d; }
 .site-footer { display: flex; justify-content: space-between; padding: 20px clamp(20px, 6vw, 84px); border-top: 1px solid #e2ebee; color: #8da0a8; font-size: 11px; }
 .site-footer span:first-child { color: #55717d; font-weight: 700; }
-@media (max-width: 760px) { .site-header { height: 62px; padding: 0 18px; } .order-section { grid-template-columns: 1fr; width: min(540px, calc(100% - 28px)); padding: 40px 0 48px; gap: 20px; } .order-copy { padding: 0 5px; } .order-copy h2 { margin: 8px 0; font-size: 30px; } .order-copy > p { font-size: 13px; } .trust-line { margin-top: 13px; } .brands-section { padding: 32px 15px; } .brand-list { gap: 8px; margin-top: 19px; } .brand-tile { min-width: 92px; min-height: 53px; padding: 7px 13px; font-size: 16px; } }
-@media (max-width: 420px) { .header-order { padding: 8px 10px; font-size: 11px; } .brands-heading p { font-size: 12px; } .brand-tile { min-width: 82px; } .lead-card { padding: 20px 16px; border-radius: 20px; } .site-footer { font-size: 10px; } }
+@media (max-width: 760px) { .site-header { height: 62px; padding: 0 18px; } .order-section { grid-template-columns: 1fr; width: min(540px, calc(100% - 28px)); padding: 40px 0 48px; gap: 20px; } .order-copy { padding: 0 5px; } .order-copy h2 { margin: 8px 0; font-size: 30px; } .order-copy > p { font-size: 13px; } .trust-line { margin-top: 13px; } .brands-section { padding: 34px 15px; } .brand-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 20px; } .brand-card { padding: 9px; border-radius: 15px; } .brand-card h2 { font-size: 13px; } }
+@media (max-width: 420px) { .header-order { padding: 8px 10px; font-size: 11px; } .brands-heading p { font-size: 12px; } .brand-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 8px; } .brand-art { border-radius: 9px; } .lead-card { padding: 20px 16px; border-radius: 20px; } .site-footer { font-size: 10px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
