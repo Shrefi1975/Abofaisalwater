@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useRef, useState } from "react"
-import { ArrowDown, ArrowLeft, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
+import { ArrowDown, ArrowLeft, BadgePercent, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
 
 const brands = [
   { name: "مياه رِفا", key: "rifa" },
@@ -43,9 +43,10 @@ export default function Page() {
 
       <section id="top" className="hero-banner" aria-label="عروض مياه جدة">
         <picture className="hero-picture">
-          <source media="(max-width: 760px)" srcSet="/jeddah-water-delivery-mobile.png" />
-          <img src="/jeddah-water-hero-professional.png" alt="تشكيلة من عبوات مياه رِفا ونوفا وأكويا وصفا والبيان وبيرين والعين أمام أفق مدينة جدة" className="hero-image" />
+          <source media="(max-width: 760px)" srcSet="/jeddah-water-hero-mobile-campaign.png" />
+          <img src="/jeddah-water-hero-campaign.png" alt="تشكيلة عبوات مياه متنوعة أمام نافورة الملك فهد وأفق جدة الساحلي مع سيارة توصيل" className="hero-image" />
         </picture>
+        <div className="desktop-hero-copy"><h1>مياهك المفضلة، واصلة لباب بيتك</h1><p>أشهر الماركات وتوصيل مجاني داخل جدة</p></div>
         <div className="desktop-hero-actions">
           <button type="button" onClick={goToOrder} className="desktop-hero-action desktop-order-action">اطلب الآن</button>
           <a href="#brands" className="desktop-hero-action desktop-browse-action">تصفح المنتجات</a>
@@ -58,6 +59,12 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="offer-banner" aria-labelledby="offer-heading">
+        <span className="offer-icon" aria-hidden="true"><BadgePercent size={34} strokeWidth={1.8} /></span>
+        <div className="offer-copy"><span className="offer-kicker">العرض اللي تنتظرونه</span><h2 id="offer-heading">عروض الـ10 ريال <span>رجعت!</span></h2><p>اطلب الآن واستمتع بتوصيل مجاني حتى باب منزلك.</p></div>
+        <a className="offer-cta" href="#order">اطلب الآن <ArrowLeft size={17} /></a>
+      </section>
+
       <section id="brands" className="brands-section" aria-labelledby="brands-heading">
         <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">ماركات مياه نثق بجودتها</h1><p>اختاري من أشهر العلامات، ونوصلها لبابك مجاناً داخل جدة.</p></div>
         <div className="brand-list" aria-label="ماركات المياه المتوفرة">{brands.map((brand) => <article className="brand-card" key={brand.key}><div className={`brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} /><h2>{brand.name}</h2></article>)}</div>
@@ -65,7 +72,7 @@ export default function Page() {
       </section>
 
       <section id="order" className="order-section" aria-labelledby="order-heading">
-        <div className="order-copy"><span className="section-kicker">العرض اللي تنتظرونه</span><h2 id="order-heading">عروض الـ10 ريال<br /><span>رجعت!</span></h2><p><strong>اطلب الآن،</strong> التوصيل <span>مجاني</span> لباب بيتك.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
+        <div className="order-copy"><span className="section-kicker">طلبك بخطوات بسيطة</span><h2 id="order-heading">اطلب مياهك<br /><span>المفضلة بسهولة</span></h2><p>اختر نوع المياه وأدخل بياناتك، وسنتواصل معك مباشرة عبر واتساب لتأكيد الطلب.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
         <div className="lead-card">
           <form onSubmit={sendToWhatsApp} className="lead-form">
             <label className="sr-only" htmlFor="neighborhood">الحي</label>
