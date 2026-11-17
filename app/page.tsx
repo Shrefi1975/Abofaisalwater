@@ -44,12 +44,15 @@ export default function Page() {
       <section id="top" className="hero-banner" aria-label="عروض مياه جدة">
         <picture className="hero-picture">
           <source media="(max-width: 760px)" srcSet="/jeddah-water-delivery-mobile.png" />
-          <img src="/jeddah-water-delivery-hero.jpg" alt="توصيل المياه في جدة مع سيارة التوصيل على الواجهة البحرية" className="hero-image" />
+          <img src="/jeddah-water-hero-professional.png" alt="تشكيلة من عبوات مياه رِفا ونوفا وأكويا وصفا والبيان وبيرين والعين أمام أفق مدينة جدة" className="hero-image" />
         </picture>
-        <button className="hero-hotspot order-hotspot" type="button" onClick={goToOrder} aria-label="اطلب الآن"><span className="sr-only">اطلب الآن</span></button>
-        <a className="hero-hotspot browse-hotspot" href="#brands" aria-label="تصفح المنتجات"><span className="sr-only">تصفح المنتجات</span></a>
+        <div className="desktop-hero-actions">
+          <button type="button" onClick={goToOrder} className="desktop-hero-action desktop-order-action">اطلب الآن</button>
+          <a href="#brands" className="desktop-hero-action desktop-browse-action">تصفح المنتجات</a>
+        </div>
         <div className="mobile-hero-copy">
           <div className="mobile-hero-heading"><h1>مياهك المفضلة… واصلة لحد بابك!</h1><p>تشكيلة من أشهر ماركات المياه في جدة</p></div>
+          <div className="mobile-brand-strip" role="group" aria-label="ماركات المياه المتوفرة في جدة">{brands.map((brand) => <span key={brand.key} className={`mobile-brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} />)}</div>
           <a href="#brands" className="mobile-hero-action mobile-browse-action">تصفح المنتجات</a>
           <button type="button" onClick={goToOrder} className="mobile-hero-action mobile-order-action">اطلب الآن</button>
         </div>
