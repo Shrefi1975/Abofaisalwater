@@ -65,7 +65,7 @@ export default function Page() {
       </section>
 
       <section id="order" className="order-section" aria-labelledby="order-heading">
-        <div className="order-copy"><span className="section-kicker">خطوة واحدة تفصلك عن عرضك</span><h2 id="order-heading">خلّنا نوصّل لك<br /><span>العروض المناسبة لحيّك.</span></h2><p><strong>اكتب اسم الحي ورقم جوالك</strong>، وفريقنا بيتواصل معك على <span>واتساب.</span></p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
+        <div className="order-copy"><span className="section-kicker">العرض اللي تنتظرونه</span><h2 id="order-heading">عروض الـ10 ريال<br /><span>رجعت!</span></h2><p><strong>اطلب الآن،</strong> التوصيل <span>مجاني</span> لباب بيتك.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
         <div className="lead-card">
           <form onSubmit={sendToWhatsApp} className="lead-form">
             <label className="sr-only" htmlFor="neighborhood">الحي</label>
