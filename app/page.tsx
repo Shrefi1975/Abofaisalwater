@@ -16,10 +16,11 @@ const brands = [
 export default function Page() {
   const [neighborhood, setNeighborhood] = useState("")
   const [phone, setPhone] = useState("")
+  const [preferredWater, setPreferredWater] = useState("")
   const neighborhoodInput = useRef<HTMLInputElement>(null)
   const normalizedPhone = useMemo(() => phone.replace(/\D/g, "").replace(/^0/, ""), [phone])
   const phoneIsValid = /^5\d{8}$/.test(normalizedPhone)
-  const ready = Boolean(neighborhood.trim()) && phoneIsValid
+  const ready = Boolean(neighborhood.trim() && preferredWater) && phoneIsValid
 
   function goToOrder() {
     document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "center" })
@@ -29,7 +30,7 @@ export default function Page() {
   function sendToWhatsApp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!ready) return
-    const message = `مرحباً، أرغب بمعرفة العروض المتاحة في حي ${neighborhood.trim()}.\nرقم الجوال: +966${normalizedPhone}`
+    const message = `مرحباً، أرغب بمعرفة العروض المتاحة في حي ${neighborhood.trim()}.\nنوع المياه المفضل: ${preferredWater}\nرقم الجوال: +966${normalizedPhone}`
     window.open(`https://wa.me/966560757063?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer")
   }
 
@@ -41,9 +42,17 @@ export default function Page() {
       </header>
 
       <section id="top" className="hero-banner" aria-label="عروض مياه جدة">
-        <img src="/jeddah-water-delivery-hero.jpg" alt="عروض توصيل المياه المجاني في جدة مع تشكيلة من أشهر الماركات" className="hero-image" />
+        <picture className="hero-picture">
+          <source media="(max-width: 760px)" srcSet="/jeddah-water-delivery-mobile.png" />
+          <img src="/jeddah-water-delivery-hero.jpg" alt="توصيل المياه في جدة مع سيارة التوصيل على الواجهة البحرية" className="hero-image" />
+        </picture>
         <button className="hero-hotspot order-hotspot" type="button" onClick={goToOrder} aria-label="اطلب الآن"><span className="sr-only">اطلب الآن</span></button>
         <a className="hero-hotspot browse-hotspot" href="#brands" aria-label="تصفح المنتجات"><span className="sr-only">تصفح المنتجات</span></a>
+        <div className="mobile-hero-copy">
+          <div className="mobile-hero-heading"><h1>مياهك المفضلة… واصلة لحد بابك!</h1><p>تشكيلة من أشهر ماركات المياه في جدة</p></div>
+          <a href="#brands" className="mobile-hero-action mobile-browse-action">تصفح المنتجات</a>
+          <button type="button" onClick={goToOrder} className="mobile-hero-action mobile-order-action">اطلب الآن</button>
+        </div>
       </section>
 
       <section id="brands" className="brands-section" aria-labelledby="brands-heading">
@@ -53,12 +62,13 @@ export default function Page() {
       </section>
 
       <section id="order" className="order-section" aria-labelledby="order-heading">
-        <div className="order-copy"><span className="section-kicker">خطوة واحدة تفصلك عن عرضك</span><h2 id="order-heading">خلّنا نوصّل لك<br /><span>العروض المناسبة لحيّك.</span></h2><p>اكتب اسم الحي ورقم جوالك، وفريقنا بيتواصل معك على واتساب.</p><div className="trust-line"><span className="trust-icon"><Phone size={15} /></span> تواصل مباشر وسريع عبر واتساب</div></div>
+        <div className="order-copy"><span className="section-kicker">خطوة واحدة تفصلك عن عرضك</span><h2 id="order-heading">خلّنا نوصّل لك<br /><span>العروض المناسبة لحيّك.</span></h2><p><strong>اكتب اسم الحي ورقم جوالك</strong>، وفريقنا بيتواصل معك على <span>واتساب.</span></p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
         <div className="lead-card">
-          <div className="form-intro"><span className="step-number">01 <span>/ 02</span></span><h3>لا تفوتك العروض، سجل جوالك وبنتصل عليك:</h3><p>اكتب اسم الحي يدوياً لنرسل لك العروض القريبة منك.</p></div>
           <form onSubmit={sendToWhatsApp} className="lead-form">
-            <label htmlFor="neighborhood">الحي</label>
+            <label className="sr-only" htmlFor="neighborhood">الحي</label>
             <div className="input-shell"><MapPin className="field-icon" size={19} aria-hidden="true" /><input ref={neighborhoodInput} id="neighborhood" type="text" value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)} placeholder="اكتب اسم الحي" autoComplete="address-level3" required /></div>
+            <label htmlFor="preferred-water">نوع المياه المفضل</label>
+            <div className="input-shell select-shell"><select id="preferred-water" value={preferredWater} onChange={(event) => setPreferredWater(event.target.value)} required><option value="" disabled>اختر نوع المياه المفضل</option>{brands.map((brand) => <option key={brand.key} value={brand.name}>{brand.name}</option>)}</select></div>
             <label htmlFor="phone">رقم الجوال</label>
             <div className="input-shell phone-shell" dir="ltr"><span className="saudi-flag" aria-label="علم المملكة العربية السعودية"><span>لا إله إلا الله</span><i /></span><span className="dial-code">+966</span><span className="phone-divider" /><input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={10} value={phone} onChange={(event) => setPhone(event.target.value.replace(/[^\d\s]/g, ""))} placeholder="5XXXXXXXX" aria-describedby="phone-hint" required /><Phone className="field-icon phone-icon" size={17} aria-hidden="true" /></div>
             <span id="phone-hint" className="field-hint">أدخل رقمك بصيغة 5XXXXXXXX</span>
