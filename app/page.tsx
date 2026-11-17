@@ -1,22 +1,27 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { ArrowLeft, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
-import { JeddahMap } from "@/components/jeddah-map"
+import { useMemo, useRef, useState } from "react"
+import { ArrowDown, ArrowLeft, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
 
-const neighborhoods = ["البلد", "الجامعة", "الفيحاء", "الروابي", "القريات", "غليل", "النزلة", "النزلة الشرقية", "الحرازات", "أبرق الرغامة", "الثعالبة"]
+const brands = ["بيرين", "Nova", "نوق", "فيحاء", "أكويا", "البير"]
 
 export default function Page() {
   const [neighborhood, setNeighborhood] = useState("")
   const [phone, setPhone] = useState("")
+  const neighborhoodInput = useRef<HTMLInputElement>(null)
   const normalizedPhone = useMemo(() => phone.replace(/\D/g, "").replace(/^0/, ""), [phone])
   const phoneIsValid = /^5\d{8}$/.test(normalizedPhone)
   const ready = Boolean(neighborhood.trim()) && phoneIsValid
 
+  function goToOrder() {
+    document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "center" })
+    window.setTimeout(() => neighborhoodInput.current?.focus(), 450)
+  }
+
   function sendToWhatsApp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!ready) return
-    const message = `مرحباً، أرغب بمعرفة العروض المتاحة في حي ${neighborhood}.\nرقم الجوال: +966${normalizedPhone}`
+    const message = `مرحباً، أرغب بمعرفة العروض المتاحة في حي ${neighborhood.trim()}.\nرقم الجوال: +966${normalizedPhone}`
     window.open(`https://wa.me/966560757063?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer")
   }
 
@@ -24,41 +29,35 @@ export default function Page() {
     <main dir="rtl" className="min-h-screen overflow-hidden bg-[#f4f8fa] text-[#143b50]">
       <header className="site-header">
         <a href="#top" className="brand" aria-label="روافد جدة، الرئيسية"><span className="brand-mark"><span /></span><span>رَوافِد <small>جدة</small></span></a>
-        <span className="header-note"><span className="live-dot" /> عروض خاصة لسكان جدة</span>
+        <a className="header-order" href="#order">سجّل الآن <ArrowLeft size={15} /></a>
       </header>
 
-      <section id="top" className="landing-shell">
-        <div className="hero-copy">
-          <div className="eyebrow"><Sparkles size={15} /> عروض أقرب إليك</div>
-          <h1>جدة أقرب…<br /><span>والعروض أقرب لك.</span></h1>
-          <p>اختر حيّك وسجّل رقمك، ونوصلك بأفضل العروض المناسبة لك.</p>
-          <div className="trust-line"><span className="trust-icon"><Phone size={15} /></span> تواصل مباشر وسريع عبر واتساب</div>
-        </div>
+      <section id="top" className="hero-banner" aria-label="عروض مياه جدة">
+        <img src="/jeddah-water-delivery-hero.jpg" alt="عروض توصيل المياه المجاني في جدة مع تشكيلة من أشهر الماركات" className="hero-image" />
+        <button className="hero-hotspot order-hotspot" type="button" onClick={goToOrder} aria-label="اطلب الآن"><span className="sr-only">اطلب الآن</span></button>
+        <a className="hero-hotspot browse-hotspot" href="#brands" aria-label="تصفح المنتجات"><span className="sr-only">تصفح المنتجات</span></a>
+      </section>
 
-        <section className="lead-card" aria-label="نموذج التسجيل">
-          <div className="card-heading"><div><span className="section-kicker">خطوة واحدة تفصلك</span><h2>اختر حَيَّك</h2></div><span className="step-number">01 <span>/ 02</span></span></div>
-          <JeddahMap selected={neighborhood} onSelect={setNeighborhood} />
-          <div className="form-intro"><h3>لا تفوتك العروض، سجل جوالك وبنتصل عليك:</h3><p>نعرف حيّك عشان نرسل لك اللي يهمّك فقط.</p></div>
+      <section id="brands" className="brands-section" aria-labelledby="brands-heading">
+        <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">مياهك المفضلة… واصلة لحد بابك!</h1><p>توصيل مجاني داخل جدة من أشهر ماركات المياه.</p></div>
+        <div className="brand-list" aria-label="الماركات المتوفرة">{brands.map((brand, index) => <div className={`brand-tile brand-tile-${index + 1}`} key={brand}>{brand}</div>)}</div>
+        <a href="#order" className="browse-link">اكتشف العروض المتاحة <ArrowDown size={16} /></a>
+      </section>
+
+      <section id="order" className="order-section" aria-labelledby="order-heading">
+        <div className="order-copy"><span className="section-kicker">خطوة واحدة تفصلك عن عرضك</span><h2 id="order-heading">خلّنا نوصّل لك<br /><span>العروض المناسبة لحيّك.</span></h2><p>اكتب اسم الحي ورقم جوالك، وفريقنا بيتواصل معك على واتساب.</p><div className="trust-line"><span className="trust-icon"><Phone size={15} /></span> تواصل مباشر وسريع عبر واتساب</div></div>
+        <div className="lead-card">
+          <div className="form-intro"><span className="step-number">01 <span>/ 02</span></span><h3>لا تفوتك العروض، سجل جوالك وبنتصل عليك:</h3><p>اكتب اسم الحي يدوياً لنرسل لك العروض القريبة منك.</p></div>
           <form onSubmit={sendToWhatsApp} className="lead-form">
             <label htmlFor="neighborhood">الحي</label>
-            <div className="input-shell">
-              <MapPin className="field-icon" size={19} aria-hidden="true" />
-              <input id="neighborhood" list="jeddah-neighborhoods" value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)} placeholder="ابحث عن حيّك أو اختره من الخريطة" autoComplete="address-level3" required />
-              <datalist id="jeddah-neighborhoods">{neighborhoods.map((name) => <option key={name} value={name} />)}</datalist>
-            </div>
+            <div className="input-shell"><MapPin className="field-icon" size={19} aria-hidden="true" /><input ref={neighborhoodInput} id="neighborhood" type="text" value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)} placeholder="اكتب اسم الحي" autoComplete="address-level3" required /></div>
             <label htmlFor="phone">رقم الجوال</label>
-            <div className="input-shell phone-shell" dir="ltr">
-              <span className="saudi-flag" aria-label="علم المملكة العربية السعودية"><span>لا إله إلا الله</span><i /></span>
-              <span className="dial-code">+966</span>
-              <span className="phone-divider" />
-              <input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={10} value={phone} onChange={(event) => setPhone(event.target.value.replace(/[^\d\s]/g, ""))} placeholder="5XXXXXXXX" aria-describedby="phone-hint" required />
-              <Phone className="field-icon phone-icon" size={17} aria-hidden="true" />
-            </div>
+            <div className="input-shell phone-shell" dir="ltr"><span className="saudi-flag" aria-label="علم المملكة العربية السعودية"><span>لا إله إلا الله</span><i /></span><span className="dial-code">+966</span><span className="phone-divider" /><input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={10} value={phone} onChange={(event) => setPhone(event.target.value.replace(/[^\d\s]/g, ""))} placeholder="5XXXXXXXX" aria-describedby="phone-hint" required /><Phone className="field-icon phone-icon" size={17} aria-hidden="true" /></div>
             <span id="phone-hint" className="field-hint">أدخل رقمك بصيغة 5XXXXXXXX</span>
             <button className="whatsapp-button" type="submit" disabled={!ready}><MessageCircle size={20} fill="currentColor" strokeWidth={1.6} /><span>إرسال عبر الواتساب</span><ArrowLeft className="submit-arrow" size={18} /></button>
             <p className="privacy-note"><strong>الحد الأدنى للطلب ٣٠ كرتون</strong><span> • بالإرسال، توافق على التواصل معك بخصوص العروض.</span></p>
           </form>
-        </section>
+        </div>
       </section>
       <footer className="site-footer"><span>رَوافِد جدة</span><span>عروض محلية، على مزاجك.</span></footer>
     </main>

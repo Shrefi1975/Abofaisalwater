@@ -4,7 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'روافد جدة | عروض حَيّك توصلك',
-  description: 'اختر حيّك في جدة وسجّل رقم جوالك لتصلك أفضل العروض المحلية عبر واتساب.',
+  description: 'توصيل مجاني للمياه في جدة من أشهر الماركات. اكتب اسم الحي ورقم جوالك لتصلك أفضل العروض عبر واتساب.',
   generator: 'v0.app',
   icons: { icon: '/icon.svg' },
 }
