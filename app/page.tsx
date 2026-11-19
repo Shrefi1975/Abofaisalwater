@@ -51,22 +51,11 @@ export default function Page() {
         <a className="header-order" href="#order">سجّل الآن <ArrowLeft size={15} /></a>
       </header>
 
-      <section id="top" className="hero-banner" aria-label="عروض مياه جدة">
-        <picture className="hero-picture">
-          <source media="(max-width: 760px)" srcSet="/jeddah-water-hero-mobile-campaign.png" />
-          <img src="/jeddah-water-hero-campaign.png" alt="تشكيلة عبوات مياه متنوعة أمام نافورة الملك فهد وأفق جدة الساحلي مع سيارة توصيل" className="hero-image" />
-        </picture>
-        <div className="desktop-hero-copy"><h1>مياهك المفضلة، واصلة لباب بيتك</h1><p>أشهر الماركات وتوصيل مجاني داخل جدة</p></div>
-        <div className="desktop-hero-actions">
-          <button type="button" onClick={goToOrder} className="desktop-hero-action desktop-order-action">اطلب الآن</button>
-          <a href="#brands" className="desktop-hero-action desktop-browse-action">تصفح المنتجات</a>
-        </div>
-        <div className="mobile-hero-copy">
-          <div className="mobile-hero-heading"><h1>مياهك المفضلة… واصلة لحد بابك!</h1><p>تشكيلة من أشهر ماركات المياه في جدة</p></div>
-          <div className="mobile-brand-strip" role="group" aria-label="ماركات المياه المتوفرة في جدة">{brands.map((brand) => <span key={brand.key} className={`mobile-brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} />)}</div>
-          <a href="#brands" className="mobile-hero-action mobile-browse-action">تصفح المنتجات</a>
-          <button type="button" onClick={goToOrder} className="mobile-hero-action mobile-order-action">اطلب الآن</button>
-        </div>
+      <section id="top" className="hero-banner hero-poster-banner" aria-label="عروض مياه جدة">
+        <h1 className="sr-only">مياه شرب نقية تصل إلى باب منزلك في جدة</h1>
+        <a href="#order" className="hero-poster-link" aria-label="تسوق الآن، واطلب مياهك لتوصلك إلى منزلك">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1795097375293-r23QkDtCWR3lnZMlepAABDmCSD7iwP.jpg" alt="ملصق ترويجي لمياه جدة يعرض شعارات العلامات التجارية وعبوات مياه ومركبة توصيل، مع عبارة مياه شرب نقية تصل إلى باب منزلك وزر تسوق الآن" className="hero-poster-image" />
+        </a>
       </section>
 
       <section className="offer-banner" aria-labelledby="offer-heading">
