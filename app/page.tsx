@@ -65,14 +65,8 @@ export default function Page() {
         <a className="offer-cta" href="#order">اطلب الآن <ArrowLeft size={17} /></a>
       </section>
 
-      <section id="brands" className="brands-section" aria-labelledby="brands-heading">
-        <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">ماركات مياه نثق بجودتها</h1><p>اختاري من أشهر العلامات، ونوصلها لبابك مجاناً داخل جدة.</p></div>
-        <div className="brand-list" aria-label="ماركات المياه المتوفرة">{brands.map((brand) => <article className="brand-card" key={brand.key}><div className={`brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} /><h2>{brand.name}</h2></article>)}</div>
-        <a href="#order" className="browse-link">اكتشف العروض المتاحة <ArrowDown size={16} /></a>
-      </section>
-
       <section id="order" className="order-section" aria-labelledby="order-heading">
-        <div className="order-copy"><span className="section-kicker">طلبك بخطوات بسيطة</span><h2 id="order-heading">اطلب مياهك<br /><span>المفضلة بسهولة</span></h2><p>اختر نوع المياه وأدخل بياناتك، وسنتواصل معك مباشرة عبر واتساب لتأكيد الطلب.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
+        <div className="order-copy"><span className="section-kicker">طلبك بخطوات بسيطة</span><h2 id="order-heading">اطلبها الآن،<br /><span>وتوصلك إلى باب بيتك مجانًا</span></h2><p>اختر نوع المياه وأدخل بياناتك، وسنتواصل معك مباشرة عبر واتساب لتأكيد الطلب.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
         <div className="lead-card">
           <form onSubmit={sendToWhatsApp} className="lead-form">
             <label className="sr-only" htmlFor="neighborhood">الحي</label>
@@ -82,11 +76,19 @@ export default function Page() {
             <label htmlFor="phone">رقم الجوال</label>
             <div className="input-shell phone-shell" dir="ltr"><span className="saudi-flag" aria-label="علم المملكة العربية السعودية"><span>لا إله إلا الله</span><i /></span><span className="dial-code">+966</span><span className="phone-divider" /><input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={10} value={phone} onChange={(event) => setPhone(event.target.value.replace(/[^\d\s]/g, ""))} placeholder="5XXXXXXXX" aria-describedby="phone-hint" required /><Phone className="field-icon phone-icon" size={17} aria-hidden="true" /></div>
             <span id="phone-hint" className="field-hint">أدخل رقمك بصيغة 5XXXXXXXX</span>
+            <div className="minimum-order" role="note"><span>الحد الأدنى للطلب</span><strong>٣٠ كرتون</strong></div>
             <button className="whatsapp-button" type="submit" disabled={!ready}><MessageCircle size={20} fill="currentColor" strokeWidth={1.6} /><span>إرسال عبر الواتساب</span><ArrowLeft className="submit-arrow" size={18} /></button>
-            <p className="privacy-note"><strong>الحد الأدنى للطلب ٣٠ كرتون</strong><span> • بالإرسال، توافق على التواصل معك بخصوص العروض.</span></p>
+            <p className="privacy-note"><span>بالإرسال، توافق على التواصل معك بخصوص العروض.</span></p>
           </form>
         </div>
       </section>
+
+      <section id="brands" className="brands-section" aria-labelledby="brands-heading">
+        <div className="brands-heading"><span><Sparkles size={16} /> اختيارات جدة المفضلة</span><h1 id="brands-heading">ماركات مياه نثق بجودتها</h1><p>اختاري من أشهر العلامات، ونوصلها لبابك مجاناً داخل جدة.</p></div>
+        <div className="brand-list" aria-label="ماركات المياه المتوفرة">{brands.map((brand) => <article className="brand-card" key={brand.key}><div className={`brand-art brand-art-${brand.key}`} role="img" aria-label={`شعار ${brand.name}`} /><h2>{brand.name}</h2></article>)}</div>
+        <a href="#order" className="browse-link">اكتشف العروض المتاحة <ArrowDown size={16} /></a>
+      </section>
+
       <footer className="site-footer"><span>رَوافِد جدة</span><span>عروض محلية، على مزاجك.</span></footer>
     </main>
   )
