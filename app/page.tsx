@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { ArrowDown, ArrowLeft, BadgePercent, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react"
 
 const brands = [
@@ -17,7 +17,17 @@ export default function Page() {
   const [neighborhood, setNeighborhood] = useState("")
   const [phone, setPhone] = useState("")
   const [preferredWater, setPreferredWater] = useState("")
+  const [orderSectionVisible, setOrderSectionVisible] = useState(false)
   const neighborhoodInput = useRef<HTMLInputElement>(null)
+  const orderSectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const orderSection = orderSectionRef.current
+    if (!orderSection) return
+    const observer = new IntersectionObserver(([entry]) => setOrderSectionVisible(entry.isIntersecting), { threshold: 0.1 })
+    observer.observe(orderSection)
+    return () => observer.disconnect()
+  }, [])
   const normalizedPhone = useMemo(() => phone.replace(/\D/g, "").replace(/^0/, ""), [phone])
   const phoneIsValid = /^5\d{8}$/.test(normalizedPhone)
   const ready = Boolean(neighborhood.trim() && preferredWater) && phoneIsValid
@@ -65,8 +75,8 @@ export default function Page() {
         <a className="offer-cta" href="#order">اطلب الآن <ArrowLeft size={17} /></a>
       </section>
 
-      <section id="order" className="order-section" aria-labelledby="order-heading">
-        <div className="order-copy"><span className="section-kicker">طلبك بخطوات بسيطة</span><h2 id="order-heading">اطلبها الآن،<br /><span>وتوصلك إلى باب بيتك مجانًا</span></h2><p>اختر نوع المياه وأدخل بياناتك، وسنتواصل معك مباشرة عبر واتساب لتأكيد الطلب.</p><div className="trust-line"><span className="trust-icon"><Phone size={16} /></span><span>تواصل مباشر وسريع عبر واتساب</span></div></div>
+      <section id="order" ref={orderSectionRef} className="order-section" aria-labelledby="order-heading">
+        <div className="order-copy"><span className="section-kicker">طلبك بخطوات بسيطة</span><h2 id="order-heading">اطلبها الآن،<br /><span>وتوصلك إلى باب بيتك مجانًا</span></h2></div>
         <div className="lead-card">
           <form onSubmit={sendToWhatsApp} className="lead-form">
             <label className="sr-only" htmlFor="neighborhood">الحي</label>
@@ -90,6 +100,7 @@ export default function Page() {
       </section>
 
       <footer className="site-footer"><span>رَوافِد جدة</span><span>عروض محلية، على مزاجك.</span></footer>
+      {!orderSectionVisible && <a className="floating-whatsapp" href="https://wa.me/966560757063" target="_blank" rel="noopener noreferrer" aria-label="تواصل معنا عبر واتساب"><MessageCircle size={26} aria-hidden="true" /><span className="sr-only">تواصل معنا عبر واتساب</span></a>}
     </main>
   )
 }
