@@ -32,11 +32,6 @@ export default function Page() {
   const phoneIsValid = /^5\d{8}$/.test(normalizedPhone)
   const ready = Boolean(neighborhood.trim() && preferredWater) && phoneIsValid
 
-  function goToOrder() {
-    document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "center" })
-    window.setTimeout(() => neighborhoodInput.current?.focus(), 450)
-  }
-
   function sendToWhatsApp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!ready) return
@@ -52,9 +47,12 @@ export default function Page() {
       </header>
 
       <section id="top" className="hero-banner hero-poster-banner" aria-label="عروض مياه جدة">
-        <h1 className="sr-only">مياه شرب نقية تصل إلى باب منزلك في جدة</h1>
         <a href="#order" className="hero-poster-link" aria-label="تسوق الآن، واطلب مياهك لتوصلك إلى منزلك">
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1795097375293-r23QkDtCWR3lnZMlepAABDmCSD7iwP.jpg" alt="ملصق ترويجي لمياه جدة يعرض شعارات العلامات التجارية وعبوات مياه ومركبة توصيل، مع عبارة مياه شرب نقية تصل إلى باب منزلك وزر تسوق الآن" className="hero-poster-image" />
+          <picture className="hero-poster-picture">
+            <source media="(min-width: 761px)" srcSet="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_l2y57vl2y57vl2y5-YT7FDCmEFKVe37tjZTy3RRMz6LfqGp.jpg" />
+            <source media="(max-width: 760px)" srcSet="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1795097375293-r23QkDtCWR3lnZMlepAABDmCSD7iwP.jpg" />
+            <img src="/jeddah-water-desktop-hero.jpg" alt="ملصق ترويجي لمياه جدة يعرض شعارات العلامات التجارية وعبوات مياه ومركبة توصيل وعبارة تسوق الآن" className="hero-poster-image" />
+          </picture>
         </a>
       </section>
 
@@ -75,7 +73,7 @@ export default function Page() {
             <label htmlFor="phone">رقم الجوال</label>
             <div className="input-shell phone-shell" dir="ltr"><span className="saudi-flag" aria-label="علم المملكة العربية السعودية"><span>لا إله إلا الله</span><i /></span><span className="dial-code">+966</span><span className="phone-divider" /><input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={10} value={phone} onChange={(event) => setPhone(event.target.value.replace(/[^\d\s]/g, ""))} placeholder="5XXXXXXXX" aria-describedby="phone-hint" required /><Phone className="field-icon phone-icon" size={17} aria-hidden="true" /></div>
             <span id="phone-hint" className="field-hint">أدخل رقمك بصيغة 5XXXXXXXX</span>
-            <div className="minimum-order" role="note"><span>الحد الأدنى للطلب</span><strong>٣٠ كرتون</strong></div>
+            <div className="minimum-order" role="note"><span>الحد الأدنى للطلب</span><strong>٢٠ كرتون</strong></div>
             <button className="whatsapp-button" type="submit" disabled={!ready}><MessageCircle size={20} fill="currentColor" strokeWidth={1.6} /><span>إرسال عبر الواتساب</span><ArrowLeft className="submit-arrow" size={18} /></button>
             <p className="privacy-note"><span>بالإرسال، توافق على التواصل معك بخصوص العروض.</span></p>
           </form>
@@ -89,7 +87,10 @@ export default function Page() {
       </section>
 
       <footer className="site-footer"><span>رَوافِد جدة</span><span>عروض محلية، على مزاجك.</span></footer>
-      {!orderSectionVisible && <a className="floating-whatsapp" href="https://wa.me/966560757063" target="_blank" rel="noopener noreferrer" aria-label="تواصل معنا عبر واتساب"><MessageCircle size={26} aria-hidden="true" /><span className="sr-only">تواصل معنا عبر واتساب</span></a>}
+      {!orderSectionVisible && <div className="floating-contact-stack" role="group" aria-label="تواصل معنا">
+        <a className="floating-contact-button floating-call" href="tel:+966560757063" aria-label="اتصل بنا على الرقم +966 56 075 7063"><Phone size={23} aria-hidden="true" /></a>
+        <a className="floating-contact-button floating-whatsapp" href="https://wa.me/966560757063" target="_blank" rel="noopener noreferrer" aria-label="تواصل معنا عبر واتساب"><MessageCircle size={25} aria-hidden="true" /></a>
+      </div>}
     </main>
   )
 }
