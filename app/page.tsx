@@ -32,11 +32,6 @@ export default function Page() {
   const phoneIsValid = /^5\d{8}$/.test(normalizedPhone)
   const ready = Boolean(neighborhood.trim() && preferredWater) && phoneIsValid
 
-  function goToOrder() {
-    document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "center" })
-    window.setTimeout(() => neighborhoodInput.current?.focus(), 450)
-  }
-
   function sendToWhatsApp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!ready) return
@@ -53,13 +48,12 @@ export default function Page() {
 
       <section id="top" className="hero-banner hero-poster-banner" aria-label="عروض مياه جدة">
         <a href="#order" className="hero-poster-link" aria-label="تسوق الآن، واطلب مياهك لتوصلك إلى منزلك">
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1795097375293-r23QkDtCWR3lnZMlepAABDmCSD7iwP.jpg" alt="ملصق ترويجي لمياه جدة يعرض شعارات العلامات التجارية وعبوات مياه ومركبة توصيل، مع عبارة مياه شرب نقية تصل إلى باب منزلك وزر تسوق الآن" className="hero-poster-image" />
+          <picture className="hero-poster-picture">
+            <source media="(min-width: 761px)" srcSet="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_l2y57vl2y57vl2y5-YT7FDCmEFKVe37tjZTy3RRMz6LfqGp.jpg" />
+            <source media="(max-width: 760px)" srcSet="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1795097375293-r23QkDtCWR3lnZMlepAABDmCSD7iwP.jpg" />
+            <img src="/jeddah-water-desktop-hero.jpg" alt="ملصق ترويجي لمياه جدة يعرض شعارات العلامات التجارية وعبوات مياه ومركبة توصيل وعبارة تسوق الآن" className="hero-poster-image" />
+          </picture>
         </a>
-        <div className="desktop-hero-copy"><h1>مياهك المفضلة، واصلة لباب بيتك</h1><p>أشهر الماركات وتوصيل مجاني داخل جدة</p></div>
-        <div className="desktop-hero-actions">
-          <button type="button" onClick={goToOrder} className="desktop-hero-action desktop-order-action">اطلب الآن</button>
-          <a href="#brands" className="desktop-hero-action desktop-browse-action">تصفح المنتجات</a>
-        </div>
       </section>
 
       <section className="offer-banner" aria-labelledby="offer-heading">
